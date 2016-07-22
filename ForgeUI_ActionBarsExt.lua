@@ -62,9 +62,12 @@ function ForgeUI_ActionBarsExt:ForgeAPI_Init()
 	self.tSubMenuItems = {}
 
 	ActionBars = Apollo.GetAddon("ForgeUI_ActionBars")
+	F:PostHook(ActionBars, "ForgeAPI_LoadSettings", function() self:ForgeAPI_LoadSettings() end)
 end
 
 function ForgeUI_ActionBarsExt:ForgeAPI_LoadSettings()
+	if not ActionBars then return end
+
 	for strKey in pairs(self._DB.global.tKeys) do
 		local bExists = false
 		for _, tBar in pairs(self._DB.profile.tFrames) do
