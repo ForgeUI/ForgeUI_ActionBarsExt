@@ -88,7 +88,7 @@ function ForgeUI_ActionBarsExt:ForgeAPI_LoadSettings()
 	for _, v in pairs(self._DB.profile.tFrames) do
 		local tBar = ActionBars:API_GetTBar(v.strKey)
 		if not tBar then
-			ActionBars:GenerateBar(v)
+			self:GenerateBar(v)
 			self.tSubMenuItems[v.strKey] = F:API_AddMenuToMenuItem(self, self.wndMenuItem, v.strName, v.strKey)
 		end
 		self:SetupBar(v)
