@@ -62,7 +62,6 @@ function ForgeUI_ActionBarsExt:ForgeAPI_Init()
 	self.tSubMenuItems = {}
 
 	ActionBars = Apollo.GetAddon("ForgeUI_ActionBars")
-	F:PostHook(ActionBars, "ForgeAPI_LoadSettings", function() self:ForgeAPI_LoadSettings() end)
 end
 
 function ForgeUI_ActionBarsExt:ForgeAPI_LoadSettings()
@@ -115,6 +114,9 @@ function ForgeUI_ActionBarsExt:ForgeAPI_PopulateOptions()
 		tMove = { 0, 0 },
 		fnCallbackReturn = self.NewBar,
 	})
+	G:API_AddText(self, wndGeneral, "After creating a new bar, click on '+' sign which appears next to 'Action bars ext' button in the left menu.", {
+		tMove = { 0, 30 }
+	})
 
 	-- remove bar
 	local wndRemoveBarCombo = G:API_AddComboBox(self, wndGeneral, "Remove bar", nil, nil, { tMove = {200, 0}, tWidths = { 150, 200 }, 
@@ -157,7 +159,7 @@ function ForgeUI_ActionBarsExt:ForgeAPI_PopulateOptions()
 
 		if v.nButtons ~= nil then
 			G:API_AddNumberBox(self, wnd, "Number of buttons ", v, "nButtons", {
-  				tMove = {200, 30},
+				tMove = {200, 30},
 				fnCallback = function(...) ActionBars:SetupButtons(v); ActionBars:EditButtons(v); ActionBars:PositionButtons(v, true) end
 			})
 		end
@@ -199,7 +201,7 @@ function ForgeUI_ActionBarsExt:ForgeAPI_PopulateOptions()
 			G:API_AddOptionToComboBox(self, wndAddSpecialCombo, "Recall", { 18, "GCBar" })
 			G:API_AddOptionToComboBox(self, wndAddSpecialCombo, "Gadget", { 0, "GCBar" })
 			G:API_AddOptionToComboBox(self, wndAddSpecialCombo, "Potion", { 27, "GCBar" })
-			G:API_AddOptionToComboBox(self, wndAddSpecialCombo, "Path", { 2, "LASBar" })
+			G:API_AddOptionToComboBox(self, wndAddSpecialCombo, "Path", { 9, "LASBar" })
 
 			local wndAddActionCombo = G:API_AddComboBox(self, wnd, "Add action bar button", nil, nil, { tMove = {0, 180}, tWidths = { 100, 300 }, 
 				fnCallback = (function(module, value, key)
